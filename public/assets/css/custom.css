@@ -1,0 +1,7 @@
+.page-banner{
+    background: url(../img//shopping-banner-img.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    min-height: 350px;
+}
+

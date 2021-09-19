@@ -1,0 +1,12 @@
+.cat-box{
+    margin-bottom: 20px;
+    .cat-name{
+        font-size:18px;
+        font-weight: 600;
+        margin-bottom: 20px;
+    }
+    .products-row{
+        display: flex;
+        flex-wrap: wrap;
+    }
+}
