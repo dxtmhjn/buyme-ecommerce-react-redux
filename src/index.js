@@ -4,13 +4,17 @@ import App from './App';
 // import * as serviceWorkerRegistration from './serviceWorkerRegistration';
 import reportWebVitals from './reportWebVitals';
 import {BrowserRouter as Router} from 'react-router-dom';
+import { Provider as ReactProvider } from 'react-redux';
+import store from './redux/store';
 
 ReactDOM.render(
+  <ReactProvider store={store}>
   <React.StrictMode>
     <Router>
     <App />
     </Router>
-  </React.StrictMode>,
+  </React.StrictMode>
+  </ReactProvider>,
   document.getElementById('root')
 );
 

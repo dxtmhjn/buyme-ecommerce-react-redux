@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import FormInput from "../shared-components/form-components/form-input/form-input.component";
 import FormButton from "../shared-components/form-components/form-button/form-button.component";
-import {signInWithGoogle} from '../../firebase/firebase.utils';
+import { signInWithGoogle, loginWithEmailPassword, auth } from '../../firebase/firebase.utils';
 
 class LoginForm extends Component {
     constructor() {
@@ -12,17 +12,23 @@ class LoginForm extends Component {
         }
     }
 
-    handleSubmit = e => {
+    handleSubmit = async e => {
         e.preventDefault();
-        this.setState({
-            email: '',
-            password: ''
-        })
+        const { email, password } = this.state;
+        try {
+            await loginWithEmailPassword(auth, email, password);
+            this.setState({
+                email: '',
+                password: ''
+            })
+        } catch (error) {
+            console.log(error.message);
+        }
     }
 
     handleChange = event => {
-        const { value, name}= event.target;
-        this.setState({ [name] : value})
+        const { value, name } = event.target;
+        this.setState({ [name]: value })
     }
 
     render() {
