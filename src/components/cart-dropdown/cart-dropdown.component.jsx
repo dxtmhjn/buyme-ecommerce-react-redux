@@ -1,7 +1,8 @@
 import React from 'react';
 import './cart-dropdown.styles.scss';
+import { connect } from 'react-redux';
 
-const CartDropdown =()=>((
+const CartDropdown =({cartItems})=>((
     <div className="shopping-cart-dropdown shopping-cart">
     <ul>
         <li>
@@ -9,18 +10,21 @@ const CartDropdown =()=>((
         </li>
         <li>
             <div className="shopping-cart-list">
-                <div className="media">
-                    <img alt="" className="d-flex mr-3" src="assets/img/logo/avatar.jpg" width="60"/>
+            {cartItems.map(item=>(
+                <div className="media" key={item.key}>
+                    <img alt="" className="d-flex mr-3" src={`${item.imageUrl}`} width="60"/>
                     <div className="media-body">
-                        <h5><a href="javascript:void(0)">Carrot</a></h5>
+                        <h5>{item.name}</h5>
                         <p className="price">
-                            <span className="discount text-muted">Rp. 700.000</span>
-                            <span>Rp. 100.000</span>
+                            <span className="discount text-muted">Rs. {item.price}</span>
+                            <span>Rs.{item.price*item.quantity}</span>
                         </p>
-                        <p className="text-muted">Qty: 1</p>
+                        <p className="text-muted">Qty: {item.quantity}</p>
                     </div>
                 </div>
-       
+            )
+            )
+        }
          
             </div>
         </li>
@@ -38,4 +42,8 @@ const CartDropdown =()=>((
 </div>
 ))
 
-export default CartDropdown;
+const mapStateToProps = (state)=>({
+    cartItems:state.cart.cartItems
+})
+
+export default connect(mapStateToProps)(CartDropdown);

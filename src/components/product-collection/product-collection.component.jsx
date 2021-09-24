@@ -7,8 +7,8 @@ const ProductCollection=({title, items})=>(
     <div className="cat-box">
     <div className="cat-name">{title}</div>
     <div className="products-row">
-        {items.filter((item,index)=>index<5).map(({id,...restKeys})=>(
-         <ProductCard key={id} {...restKeys}/>
+        {items.filter((item,index)=>index<5).map(item=>(
+         <ProductCard key={item.id} item={item}/>
         ))}
  
     </div>

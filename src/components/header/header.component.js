@@ -4,8 +4,8 @@ import { auth } from "../../firebase/firebase.utils";
 import {connect} from 'react-redux';
 import CartButton from "../cart-button/cart-button.component";
 import CartDropdown from "../cart-dropdown/cart-dropdown.component";
-
-const Header = ({currentUser,cartDropdownState})=>{
+import { toggleCartDropdown } from "../../redux/cart/cart.action";
+const Header = ({currentUser,cartDropdownState,cartToggle})=>{
 
     return(
 <div className="page-header">
@@ -44,8 +44,8 @@ const Header = ({currentUser,cartDropdownState})=>{
                             </div>
                           </li>
                           :null}
-                        <li className="nav-item">
-                           <CartButton/>
+                        <li className="nav-item dropdown">
+                           <CartButton onClick={cartToggle}/>
                            {
                            
                                cartDropdownState? <CartDropdown/>:null
@@ -61,9 +61,13 @@ const Header = ({currentUser,cartDropdownState})=>{
     );
 }
 
+const mapDispatchToProps=(dispatch)=>({
+    cartToggle: ()=>dispatch(toggleCartDropdown())
+})
+
 const mapStateToProps=(state)=>({
 currentUser:state.user.currentUser,
 cartDropdownState:state.cart.cartDropdownVisibility
 })
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps,mapDispatchToProps )(Header);
